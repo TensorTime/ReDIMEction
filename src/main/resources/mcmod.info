@@ -1,0 +1,16 @@
+[
+{
+  "modid": "redimection",
+  "name": "ReDIMEction Mod",
+  "description": "Adds Zenscript commands to control players dimensional travels.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["TensorTime"],
+  "credits": "DarkHax for writing Dimension Stages",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

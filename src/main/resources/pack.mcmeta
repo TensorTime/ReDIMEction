@@ -1,0 +1,7 @@
+{
+    "pack": {
+        "description": "ReDIMEction resources",
+        "pack_format": 3,
+        "_comment": "Zenscript commands to control player dimensional travel"
+    }
+}
