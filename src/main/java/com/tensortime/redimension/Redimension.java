@@ -1,6 +1,7 @@
 package com.tensortime.redimension;
 
 import com.blamejared.mtlib.helpers.LogHelper;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +15,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
-@Mod(modid = "redimection", name = "ReDIMEction", version = "0.1", dependencies = "required-after:crafttweaker;required-after:mtlib", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = "redimension", name = "reDIMension", version = "0.2", dependencies = "required-after:crafttweaker;required-after:mtlib", certificateFingerprint = "@FINGERPRINT@")
 public class Redimension {
 
 	public static final Map<Integer, List<Integer>> DESTINATION_MAP = new HashMap<>();
@@ -72,10 +72,6 @@ public class Redimension {
 			attemptTravel(arrow.shootingEntity, event);
 
 		}
-	}
-
-	private static boolean isValid(Entity entity, EntityTravelToDimensionEvent event) {
-		return true;
 	}
 
 	private static void attemptTravel(Entity entity, EntityTravelToDimensionEvent event) {

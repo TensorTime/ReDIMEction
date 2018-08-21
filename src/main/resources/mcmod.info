@@ -1,7 +1,7 @@
 [
 {
-  "modid": "redimection",
-  "name": "ReDIMEction Mod",
+  "modid": "redimension",
+  "name": "reDIMension Mod",
   "description": "Adds Zenscript commands to control players dimensional travels.",
   "version": "${version}",
   "mcversion": "${mcversion}",
