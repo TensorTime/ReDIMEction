@@ -26,7 +26,7 @@ public class ReDIMEction {
 
 	private static int newDestination = 0;
 	private static boolean redirectEventFlag = false;
-	
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
@@ -36,14 +36,15 @@ public class ReDIMEction {
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event) {
 		if (redirectEventFlag) {
-    		LogHelper.logInfo("Clearing state and redirecting player in dimension " + event.player.dimension + " to dimension " + newDestination);
-    		
+			LogHelper.logInfo("Clearing state and redirecting player in dimension " + event.player.dimension
+					+ " to dimension " + newDestination);
+
 			redirectEventFlag = false;
 			event.player.changeDimension(newDestination);
 			newDestination = 0;
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onDimChange(EntityTravelToDimensionEvent event) {
 
@@ -54,60 +55,56 @@ public class ReDIMEction {
 			attemptTravel(entity, event);
 
 		} else if (entity instanceof EntityThrowable) {
-		
+
 			final EntityThrowable throwable = (EntityThrowable) event.getEntity();
 			attemptTravel(throwable.getThrower(), event);
-		
-		} else if (entity  instanceof EntityItem) {
+
+		} else if (entity instanceof EntityItem) {
 
 			final EntityItem item = (EntityItem) event.getEntity();
 			if (item.getThrower() != null && !item.getThrower().isEmpty()) {
-				attemptTravel(entity.getEntityWorld().getPlayerEntityByName(item.getThrower()),
-						event);
+				attemptTravel(entity.getEntityWorld().getPlayerEntityByName(item.getThrower()), event);
 			}
-			
+
 		} else if (entity instanceof EntityArrow) {
-			
+
 			final EntityArrow arrow = (EntityArrow) event.getEntity();
 			attemptTravel(arrow.shootingEntity, event);
-			
+
 		}
 	}
 
-	private static boolean isValid (Entity entity, EntityTravelToDimensionEvent event) {
+	private static boolean isValid(Entity entity, EntityTravelToDimensionEvent event) {
 		return true;
 	}
-	
+
 	private static void attemptTravel(Entity entity, EntityTravelToDimensionEvent event) {
-		
+
 		Integer destination = event.getDimension();
 		final List<Integer> allowedSources = DESTINATION_MAP.get(destination);
-		
-		
-        if (entity instanceof EntityPlayer) {
-        	
-        	if ( (allowedSources != null) && !(allowedSources.contains(entity.dimension))) {
-        		event.setCanceled(true);
-        		LogHelper.logInfo("Blocked dimensional travel to dimension " + destination + " from source dimension " + entity.dimension);
-        	} 
-        
-        	
-        	if (SOURCE_MAP.containsKey(entity.dimension)) {
-        		newDestination = SOURCE_MAP.get(entity.dimension);
-        		
-        		if (newDestination != destination) {
-        			LogHelper.logInfo("Blocked dimensional travel based upon redirection rule");
-        			event.setCanceled(true);
-        		
-        			//How do I cause the redirection?
-        			LogHelper.logInfo("Setting State to redirect player in dimension " + entity.dimension + " to dimension " + newDestination);
-        			redirectEventFlag = true;
-        		
-        			//EntityTravelToDimensionEvent newEvent = new EntityTravelToDimensionEvent(entity, SOURCE_MAP.get(entity.dimension));
-        			//MinecraftForge.EVENT_BUS.post(newEvent);
-        		}
-        	}
-        }
+
+		if (entity instanceof EntityPlayer) {
+
+			if ((allowedSources != null) && !(allowedSources.contains(entity.dimension))) {
+				event.setCanceled(true);
+				LogHelper.logInfo("Blocked dimensional travel to dimension " + destination + " from source dimension "
+						+ entity.dimension);
+			}
+
+			if (SOURCE_MAP.containsKey(entity.dimension)) {
+				newDestination = SOURCE_MAP.get(entity.dimension);
+
+				if (newDestination != destination) {
+					LogHelper.logInfo("Blocked dimensional travel based upon redirection rule");
+					event.setCanceled(true);
+
+					LogHelper.logInfo("Setting State to redirect player in dimension " + entity.dimension
+							+ " to dimension " + newDestination);
+					redirectEventFlag = true;
+
+				}
+			}
+		}
 	}
 
 }
