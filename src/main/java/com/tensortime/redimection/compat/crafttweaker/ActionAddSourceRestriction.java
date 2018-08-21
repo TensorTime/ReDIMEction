@@ -4,12 +4,12 @@ import crafttweaker.IAction;
 import java.util.List;
 import com.tensortime.redimection.ReDIMEction;
 
-public class ActionAddDimensionSourceRestriction implements IAction {
+public class ActionAddSourceRestriction implements IAction {
     
     private final List<Integer> sources;
     private final Integer dimensionId;
     
-    public ActionAddDimensionSourceRestriction (List<Integer> sources, Integer dimensionId) {
+    public ActionAddSourceRestriction (List<Integer> sources, Integer dimensionId) {
         
         this.sources = sources;
         this.dimensionId = dimensionId;
@@ -24,6 +24,6 @@ public class ActionAddDimensionSourceRestriction implements IAction {
     @Override
     public String describe () {
         
-        return String.format("Dimension %d has new source dimension restrictions");
+        return String.format("Dimension %d has new source dimension restrictions", this.dimensionId);
     }
 }

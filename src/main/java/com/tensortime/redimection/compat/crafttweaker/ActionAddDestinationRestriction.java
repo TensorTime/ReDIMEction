@@ -1,15 +1,14 @@
 package com.tensortime.redimection.compat.crafttweaker;
 
 import crafttweaker.IAction;
-import java.util.List;
 import com.tensortime.redimection.ReDIMEction;
 
-public class ActionAddDimensionDestinationRestriction implements IAction {
+public class ActionAddDestinationRestriction implements IAction {
     
-    private final Integer source;
-    private final Integer destination;
+    private int source;
+    private int destination;
     
-    public ActionAddDimensionDestinationRestriction (Integer source, Integer destination) {
+    public ActionAddDestinationRestriction (int source, int destination) {
         
         this.source = source;
         this.destination = destination;
@@ -24,6 +23,6 @@ public class ActionAddDimensionDestinationRestriction implements IAction {
     @Override
     public String describe () {
         
-        return String.format("Dimension %d has new source restrictions");
+        return String.format("Dimension %d has mandatory destination %d", this.source, this.destination);
     }
 }
